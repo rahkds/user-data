@@ -31,7 +31,9 @@ CREATE TABLE `customers` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDX_CUSTOMERID` (`customer_id`)
-) ENGINE=InnoD;
+) ENGINE=InnoDB;
+
+
 
 
 
