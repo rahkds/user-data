@@ -54,7 +54,10 @@ CREATE TABLE `customers` (
 1 lakh rows :- 1.936s  
 
 
-
+### Sample Csv File Urls 
+https://github.com/datablist/sample-csv-files/raw/main/files/customers/customers-10000.csv  
+https://github.com/datablist/sample-csv-files/raw/main/files/customers/customers-100000.csv  
+https://github.com/datablist/sample-csv-files/raw/main/files/customers/customers-500000.zip  
 
 
 <!--
