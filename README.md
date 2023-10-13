@@ -1,5 +1,9 @@
 # Upload Csv Data to MySQL DB
 
+### Info 
+Host Url : http://localhost:1337/  
+Main starting code file : api/controllers/CustomerController.js
+
 #### Technologies Used
   Sails.js  
   MySQL  
@@ -38,11 +42,10 @@ CREATE TABLE `customers` (
 
 
 
-### Version info
+### Measurement on my local machine
+1 lakh rows :- 1.936s  
 
-This app was originally generated on Mon Apr 11 2022 18:11:44 GMT+0530 (India Standard Time) using Sails v1.4.3.
 
-<!-- Internally, Sails used [`sails-generate@2.0.3`](https://github.com/balderdashy/sails-generate/tree/v2.0.3/lib/core-generators/new). -->
 
 
 
