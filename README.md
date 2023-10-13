@@ -1,12 +1,16 @@
 # Upload Csv Data to MySQL DB
 
 ### Command 
-1. USE `npm install` in base folder  
-2. node app.js in base folder  
+1. USE `npm install` in base folder
+2. ADD `customers` schema to mysql DB 
+3. USE `node app.js` in base folder
 
-### Info 
-Host Url : http://localhost:1337/  
-Main starting code file : api/controllers/CustomerController.js
+server will start by default on `http://localhost:1337`
+
+
+### Main logical files  
+api/controllers/CustomerController.js  
+api/services/CustomerService.js
 
 #### Technologies Used
   Sails.js  
