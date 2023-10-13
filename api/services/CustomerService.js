@@ -1,3 +1,7 @@
+const Joi = require('joi').extend(require('@joi/date'));;
+const ValidationService = require('./ValidationService');
+
+
 const chunkSize = 5000;
 const csvHeaderToColumnMap = {
     'Customer Id' : 'customer_id',
@@ -13,14 +17,29 @@ const csvHeaderToColumnMap = {
     'Website' : 'website'
 };
 
+const validationSchema = Joi.object().keys({
+    customer_id: Joi.string().required(),
+    first_name: Joi.string().required(),
+    last_name: Joi.string().allow(""),
+    company: Joi.string().allow(""),
+    city: Joi.string().allow(""),
+    country: Joi.string().allow(""),
+    phone1: Joi.string().allow(""),
+    phone2: Joi.string().allow(""),
+    email: Joi.string().required(),
+    subscription_date: Joi.date().format(["YYYY-MM-DD"]).allow(""),
+    website: Joi.string().allow("")
+});
+
 var checkValidData = (customerObj = {}) => {
     let info = {
         valid : false,
         msg : ""
     }
 
-    if(!customerObj['customer_id'] || !customerObj['first_name'] || !customerObj['email']) {
-        info['msg'] = 'Required Field missing';
+    let { error, value } = ValidationService.joiValidate(validationSchema, customerObj);
+    if(error) {
+        info['msg'] = error.message;
         return info;
     }
 
