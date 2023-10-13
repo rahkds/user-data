@@ -1,9 +1,37 @@
 # Upload Csv Data to MySQL DB
 
-### Technologies Used
+#### Technologies Used
   Sails.js 
   MySQL
 
+
+#### MySQL Config 
+configuration file path :- config/datastores.js 
+mysql host : 127.0.0.1
+mysql user : root
+mysql pass : root 
+mysql db name : alert_db
+
+##### table schema 
+
+CREATE TABLE `customers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` varchar(200) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `phone1` varchar(255) DEFAULT NULL,
+  `phone2` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `subscription_date` date DEFAULT NULL,
+  `website` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_IDX_CUSTOMERID` (`customer_id`)
+) ENGINE=InnoD;
 
 
 
