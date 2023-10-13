@@ -9,8 +9,8 @@
 configuration file path :- config/datastores.js  
 mysql host : 127.0.0.1  
 mysql user : root  
-mysql pass : root 
-mysql db name : alert_db
+mysql pass : root     
+mysql db name : alert_db  
 
 ##### table schema 
 
