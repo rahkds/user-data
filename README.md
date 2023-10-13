@@ -1,5 +1,9 @@
 # Upload Csv Data to MySQL DB
 
+### Command 
+1. USE `npm install` in base folder  
+2. node app.js in base folder  
+
 ### Info 
 Host Url : http://localhost:1337/  
 Main starting code file : api/controllers/CustomerController.js
