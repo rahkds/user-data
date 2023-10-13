@@ -30,7 +30,7 @@ var checkValidData = (customerObj = {}) => {
 
 var insertCustomerData = async (customerData = []) => {
     try {
-        if(customerData.length === 0) return true;
+        if(customerData.length === 0) return {success : 0, failed: 0};
 
         let valueSqlArr = [];
         let params = [];
@@ -60,10 +60,10 @@ var insertCustomerData = async (customerData = []) => {
 
         // console.log(insertSql);
         await sails.getDatastore("master").sendNativeQuery(insertSql, params);
-        return true;
+        return {success : customerData.length, failed: 0}; 
     } catch (error) {
         console.error(error);
-        return false;
+        return {success : 0, failed: customerData.length}; 
     }
 }
 
@@ -88,14 +88,26 @@ module.exports = {
 
 
     addCustomerData : async(customerData = []) => {
-        let info = {success_count : 0, failed_count : 0};
-        while(customerData.length > 0) {
-            let remainingCustomerData = customerData.splice(chunkSize);
-            let success = await insertCustomerData(customerData);
-            if(success) info.success_count += customerData.length;
-            else info.failed_count += customerData.length;
-            customerData = remainingCustomerData;
-        }
-        return info;
+        return new Promise(async(resolve, reject) => {
+            let info = {success_count : 0, failed_count : 0};
+            if(customerData.length === 0) return resolve(info);
+            let promiseArr = [];
+            while(customerData.length > 0) {
+                let remainingCustomerData = customerData.splice(chunkSize);
+                promiseArr.push(insertCustomerData(customerData), );
+                customerData = remainingCustomerData;
+            }
+
+            Promise.allSettled((promiseArr)).then((results) => {
+                results.forEach((result) => {
+                    if(result.status == 'fulfilled') {
+                        info.success_count += result.value.success;
+                        info.failed_count += result.value.failed;
+                    } 
+                });
+                return resolve(info);
+            });
+        });
+
     }
 }
