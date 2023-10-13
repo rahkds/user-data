@@ -1,14 +1,14 @@
 # Upload Csv Data to MySQL DB
 
 #### Technologies Used
-  Sails.js 
-  MySQL
+  Sails.js  
+  MySQL  
 
 
 #### MySQL Config 
-configuration file path :- config/datastores.js 
-mysql host : 127.0.0.1
-mysql user : root
+configuration file path :- config/datastores.js  
+mysql host : 127.0.0.1  
+mysql user : root  
 mysql pass : root 
 mysql db name : alert_db
 
