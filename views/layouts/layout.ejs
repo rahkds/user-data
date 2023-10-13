@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Sails App</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" />
+    <%/* If you want to discourage search engines from indexing this site, uncomment the following line: */%>
+    <%/* <meta name="robots" content="noindex"> */%>
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/demo.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/timepicker.css">
+    <!--STYLES END-->
+    
+
+  </head>
+
+  <body id="home">
+
+
+    <% if(req.session && req.session && req.session.adminUserId) { %>
+
+    <%- partial ("../header/adminheader.ejs") %>
+    <% 
+      let gocidTemp = typeof gocid === "undefined" ? "" : gocid;
+      let gameIDTemp = typeof game_id_sub_header === "undefined" ? "" : game_id_sub_header;
+    %>
+
+    <button type="button" id="subMenuToggle" style="background-color: rgb(186, 186, 186); margin: 0.2em 0px; display: none;" class="btn btn-info" data-toggle="collapse" data-target="#collapse-sub" aria-expanded="true"><span id="main_icon" class="glyphicon glyphicon-align-justify"></span></button>
+    <div id="collapse-sub" aria-expanded="true" class="collapse in">
+      <%- partial ("../header/subAdminheader.ejs",{gocid : gocidTemp , game_id : gameIDTemp }) %>
+    </div>
+    
+    <script src="/js/permission.js"></script>
+
+    <% } %>
+    <%- body %>
+
+
+    <%- partial("../modalpopup.ejs")%>
+    <%- partial ("../footer/footer.ejs") %>
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like React, Vue.js, Angular, Ember, and Backbone
+        require that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different view engine (handlebars, dust, pug/jade, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    <!--TEMPLATES END-->
+
+
+    <!--
+        Server-side View Locals
+        ========================
+
+        Sometimes, it's convenient to get access to your server-side view locals from
+        client-side JavaScript.  This can improve page load times, remove the need for
+        extra AJAX requests, and make your client-side code easier to understand and
+        to maintain.  Sails provides a simple mechanism for accessing dynamic view
+        locals: the "exposeLocalsToBrowser()" view partial.
+
+        For more information on using this built-in feature, see:
+        https://sailsjs.com/docs/concepts/views/locals#?escaping-untrusted-data-using-exposelocalstobrowser
+
+    -->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <script>
+      let subMenuElement = document.getElementById('subMenuToggle');
+      if (document.querySelectorAll('#collapse-sub li').length >= Number('<%= sails.config.minForCollapse || 10 %>')) {
+        subMenuElement.style.display = '';
+      }
+
+      if (subMenuElement) subMenuElement.onclick = e => {
+        setTimeout(() => {
+          const response = subMenuElement.getAttribute('aria-expanded') == 'true';
+          localStorage.setItem('collapseSubMenu', !response);
+        }, 2000);
+      };
+    </script>    
+
+    <!--SCRIPTS-->
+    <script src="/dependencies/sails.io.js"></script>
+    <script src="/js/bootbox.min.js"></script>
+    <script src="/js/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/js/lib/jquery/ui.min.js"></script>
+    <script src="/js/lib/other/bootstrap.min.js"></script>
+    <script src="/js/lib/other/timepicker.js"></script>
+    <script src="/js/ndemo.js"></script>
+    <script src="/js/script.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

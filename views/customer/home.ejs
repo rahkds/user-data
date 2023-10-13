@@ -10,14 +10,42 @@
       position: relative;
     }
 
+    .response-box {
+      padding: auto;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .failed {
+      color: red;
+    }
+
   </style>
   <div align="center">
     <div class="input-row">
+      <% if(typeof resObj ==='undefined') { %>
       <form method="post" action="customer/uploadCustomerData" enctype="multipart/form-data">
          <input id="file" required type="file" name="file" style="margin-left: 35px;" accept=".csv"/>
         </br></br>
          <button type="submit">Upload</button>
       </form>
+      <% } %>
+      <div class="response-box">
+        <div>
+          <br/>
+          <br/>
+          <% if(typeof resObj !=='undefined') { %>
+              <div>
+                Response :-
+              </div>
+              <br/>
+              <p class="success"> Sucess :  <%= resObj.success_count%></p>
+              <p class="failed"> Failed : <%= resObj.failed_count%></p>
+          <% } %>
+        </div>
+      </div>
     </div>
   </div>
   </div>

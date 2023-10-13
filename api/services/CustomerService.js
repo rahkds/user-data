@@ -1,4 +1,4 @@
-const chunkSize = 20000;
+const chunkSize = 5000;
 const csvHeaderToColumnMap = {
     'Customer Id' : 'customer_id',
     'First Name' : 'first_name',
